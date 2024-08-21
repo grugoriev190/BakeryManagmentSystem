@@ -1,0 +1,28 @@
+﻿<Window x:Class="BakeryManagmentSystem.All_Products_Windows.AddProductToDBWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BakeryManagmentSystem.All_Products_Windows"
+        mc:Ignorable="d"
+        Title="AddProductToDBWindow" Height="450" Width="800">
+    <Border BorderThickness="3" >
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="60*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="1" FontSize="25" Margin="30, 30, 30, 30" Content="Write the name of the product you want to add to database:"/>
+            <TextBox x:Name="addProductToDBTextBox" Grid.Row="2" FontSize="25" Margin="30, 30, 30, 30"></TextBox>
+            <Button x:Name="addProductToDBBtn"
+                    Click="addProductToDBBtn_Click"
+                    Margin="30,30,30,30"
+                    Content="Add Product"
+                    Grid.Row="3"/>
+        </Grid>
+    </Border>
+</Window>

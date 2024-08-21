@@ -1,0 +1,283 @@
+﻿<Window x:Class="BakeryManagmentSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BakeryManagmentSystem"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920"
+        WindowState="Maximized">
+
+    <Window.Resources>
+        <Style x:Key="TextButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="{TemplateBinding Content}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontSize="24"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Blue"/>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="DarkBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
+    <Border BorderThickness="3" >
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="60*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="420*" />
+                <ColumnDefinition Width="1500*" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="showOrdersBtn"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Click="showOrdersBtn_Click"
+                    Content="Orders"
+                    FontWeight="Bold"
+                    Margin="30, 30, 30, 30"
+                    Style="{StaticResource TextButtonStyle}">
+            </Button>
+
+            <Button x:Name="RecipesBtn" 
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Click="recipesBtn_Click"
+                    Content="Recipes"
+                    FontWeight="Bold"
+                    Margin="30, 30, 30, 30"
+                    Style="{StaticResource TextButtonStyle}">
+            </Button>
+
+            <Button x:Name="statisticBtn" 
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Click="statisticBtn_Click"
+                    Content="Statistic"
+                    FontWeight="Bold"
+                    Margin="30, 30, 30, 30"
+                    Style="{StaticResource TextButtonStyle}">
+            </Button>
+
+            <Button x:Name="allProductionBtn" 
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Click="allProductionBtn_Click"
+                    Content="All production"
+                    FontWeight="Bold"
+                    Margin="30, 30, 30, 30"
+                    Style="{StaticResource TextButtonStyle}">
+            </Button>
+
+            <Button x:Name="productionAtStorageBtn" 
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Click="productionAtStorageBtn_Click"
+                    Content="Production at storage"
+                    FontWeight="Bold"
+                    Margin="30, 30, 30, 30"
+                    Style="{StaticResource TextButtonStyle}">
+            </Button>
+
+            <Button x:Name="refreshProductDBBtn"
+            Click="refreshProductDBBtn_Click"
+            Margin="30,30,30,30"
+            Content="Refresh"
+            Grid.Row="6"/>
+
+            <Grid x:Name="OrdersGrid" Grid.Column="1" Grid.RowSpan="6" Grid.Row="1" d:IsHidden="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="800*"/>
+                    <RowDefinition Height="160*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="0" Grid.ColumnSpan="3" Margin="30,30,30,30"/>
+
+                <Button x:Name="addOrderBtn"
+                        Click="addOrderBtn_Click"
+                        Margin="30,30,30,30"
+                        Content="Add Order"
+                        Grid.Column="0"
+                        Grid.Row="1"/>
+
+                <Button x:Name="changeOrderBtn"
+                        Click="changeOrderBtn_Click"
+                        Content="Change Order" 
+                        Margin="30,30,30,30"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+
+                <Button x:Name="orderReadyBtn"
+                        Click="orderReadyBtn_Click"
+                        Margin="30,30,30,30"
+                        Content="Order Done" 
+                        Grid.Column="2"
+                        Grid.Row="3"/>
+
+
+            </Grid>
+
+            <Grid x:Name="ProductionAtStorageGrid" Grid.Column="1" Grid.RowSpan="6" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="800*"/>
+                    <RowDefinition Height="160*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid x:Name="ProductsInStorageDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="0" Grid.ColumnSpan="3" Margin="30,30,30,30"/>
+
+                <Button x:Name="addProductToStorageBtn"
+                        Click="addProductToStorage_Click"
+                        Margin="30,30,30,30"
+                        Content="Add Product"
+                        Grid.Column="0"
+                        Grid.Row="1"/>
+
+                <Button x:Name="changeProductInfoAtStorageBtn"
+                        Click="changeProductInfoAtStorageBtn_Click"
+                        Content="Change Product" 
+                        Margin="30,30,30,30"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+
+                <Button x:Name="deleteProductFromStorageBtn"
+                        Click="deleteProductFromStorageBtn_Click"
+                        Margin="30,30,30,30"
+                        Content="Delete Product"
+                        Grid.Column="2"
+                        Grid.Row="1"/>
+            </Grid>
+
+            <Grid x:Name="AllProductionGrid" Grid.Column="1" Grid.RowSpan="6" Grid.Row="1" d:IsHidden="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="800*"/>
+                    <RowDefinition Height="160*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid x:Name="AllProductsDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Margin="30,30,30,30"/>
+
+                <Button x:Name="addProductBtn"
+                        Click="addProductBtn_Click"
+                        Margin="30,30,30,30"
+                        Content="Add Product"
+                        Grid.Column="0"
+                        Grid.Row="1"/>
+
+                <Button x:Name="deleteProductBtn"
+                        Click="deleteProductBtn_Click"
+                        Margin="30,30,30,30"
+                        Content="Delete Product"
+                        Grid.Column="2"
+                        Grid.Row="1"/>
+            </Grid>
+
+            <Grid x:Name="RecipesGrid" Grid.Column="1" Grid.RowSpan="6" Grid.Row="1" d:IsHidden="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="800*"/>
+                    <RowDefinition Height="160*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid x:Name="RecipesDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Margin="30,30,30,30"/>
+
+                <Button x:Name="addRecipeBtn"
+                        Click="addRecipeBtn_Click"
+                        Margin="30,30,30,30"
+                        Content="Add Recipe"
+                        Grid.Column="0"
+                        Grid.Row="1"/>
+
+                <Button x:Name="changeRecipeBtn"
+                        Click="changeRecipeBtn_Click"
+                        Content="Change Recipe" 
+                        Margin="30,30,30,30"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+
+                <Button x:Name="deleteRecipeBtn"
+                        Click="deleteRecipeBtn_Click"
+                        Margin="30,30,30,30"
+                        Content="Delete Product"
+                        Grid.Column="2"
+                        Grid.Row="1"/>
+
+            </Grid>
+
+            <Grid x:Name="StatisticGrid" Grid.Column="1" Grid.RowSpan="6" Grid.Row="1" d:IsHidden="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="800*"/>
+                    <RowDefinition Height="160*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                    <ColumnDefinition Width="500*"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="0" Grid.ColumnSpan="3" Margin="30,30,30,30"/>
+
+                <Label Grid.Column="0" Grid.Row="1" Margin="30, 0, 30 ,10" FontSize="25" Content="Order by ..."></Label>
+                <ListBox Grid.Column="0" Grid.Row="1" SelectedIndex="0" Margin="30, 60, 30 ,10">
+                    <ListBoxItem>Most sold</ListBoxItem>
+                    <ListBoxItem>The least sold</ListBoxItem>
+                    <ListBoxItem>The most expensive</ListBoxItem>
+                    <ListBoxItem>The cheapest</ListBoxItem>
+                </ListBox>
+
+                <Label Grid.Column="2" Grid.Row="1" Margin="30, 0, 30 ,10" FontSize="25" Content="Statistic for ..."></Label>
+                <ListBox Grid.Column="2" Grid.Row="1" SelectedIndex="0" Margin="30, 60, 30 ,10">
+                    <ListBoxItem>All time</ListBoxItem>
+                    <ListBoxItem>Week</ListBoxItem>
+                    <ListBoxItem>Month</ListBoxItem>
+                    <ListBoxItem>Year</ListBoxItem>
+                </ListBox>
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+
+</Window>
